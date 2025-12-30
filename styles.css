@@ -1,0 +1,28 @@
+[id*="ad"],
+[id*="ads"],
+[class*="ad"],
+[class*="ads"],
+[class*="sponsor"],
+[class*="promoted"],
+[class*="banner"],
+[class*="popup"],
+[class*="overlay"] {
+  display: none !important;
+}
+
+iframe[src*="ads"],
+iframe[src*="doubleclick"],
+iframe[src*="googlesyndication"],
+iframe[src*="adservice"] {
+  display: none !important;
+}
+
+[data-testid="ad-slot"],
+[data-testid="advertisement"] {
+  display: none !important;
+}
+
+.ytp-ad-overlay-container,
+.ytp-ad-player-overlay {
+  display: none !important;
+}
