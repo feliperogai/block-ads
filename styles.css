@@ -1,28 +1,19 @@
-[id*="ad"],
-[id*="ads"],
-[class*="ad"],
-[class*="ads"],
-[class*="sponsor"],
-[class*="promoted"],
-[class*="banner"],
-[class*="popup"],
-[class*="overlay"] {
+iframe[src*="doubleclick"],
+iframe[src*="googlesyndication"],
+iframe[src*="adservice"],
+iframe[src*="adsystem"] {
   display: none !important;
 }
 
-iframe[src*="ads"],
-iframe[src*="doubleclick"],
-iframe[src*="googlesyndication"],
-iframe[src*="adservice"] {
+ytd-display-ad-renderer,
+ytd-ad-slot-renderer,
+ytd-in-feed-ad-layout-renderer,
+.ytp-ad-overlay-container,
+.ytp-ad-player-overlay {
   display: none !important;
 }
 
 [data-testid="ad-slot"],
 [data-testid="advertisement"] {
-  display: none !important;
-}
-
-.ytp-ad-overlay-container,
-.ytp-ad-player-overlay {
   display: none !important;
 }

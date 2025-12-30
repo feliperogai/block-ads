@@ -1,38 +1,42 @@
 function removeAds() {
   document.querySelectorAll(`
-    iframe[src*="ads"],
     iframe[src*="doubleclick"],
     iframe[src*="googlesyndication"],
-    [id*="ad"],
-    [class*="ad"],
-    [class*="ads"],
-    [class*="sponsor"],
-    [class*="promoted"]
+    iframe[src*="adservice"],
+    iframe[src*="adsystem"],
+    ytd-display-ad-renderer,
+    ytd-ad-slot-renderer,
+    ytd-in-feed-ad-layout-renderer
   `).forEach(el => el.remove());
 }
 
 function handleYouTubeAds() {
   const skipBtn = document.querySelector('.ytp-ad-skip-button');
-  if (skipBtn) skipBtn.click();
+  if (skipBtn) {
+    skipBtn.click();
+    return;
+  }
 
   const video = document.querySelector('video');
-  if (video && document.querySelector('.ad-showing')) {
+  const isAd = document.querySelector('.ad-showing');
+
+  if (video && isAd) {
     video.muted = true;
-    video.currentTime = video.duration;
-    video.playbackRate = 16;
+    video.playbackRate = 8;
+  }
+
+  if (video && !isAd) {
+    video.muted = false;
+    video.playbackRate = 1;
   }
 }
 
 function handleSpotifyAds() {
-  const isAd = document.querySelector('[data-testid="context-item-info-ad"]');
   const audio = document.querySelector('audio');
+  const adLabel = document.querySelector('[data-testid="context-item-info-ad"]');
 
-  if (isAd && audio) {
-    audio.muted = true;
-    audio.volume = 0;
-  } else if (audio) {
-    audio.muted = false;
-    audio.volume = 1;
+  if (audio) {
+    audio.muted = !!adLabel;
   }
 }
 
@@ -46,9 +50,3 @@ observer.observe(document.documentElement, {
   childList: true,
   subtree: true
 });
-
-setInterval(() => {
-  removeAds();
-  handleYouTubeAds();
-  handleSpotifyAds();
-}, 500);
